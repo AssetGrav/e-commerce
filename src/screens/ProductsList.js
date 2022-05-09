@@ -1,32 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {View, Text, FlatList, StyleSheet} from "react-native";
-import { getProducts } from "../services/ProductsService";
-import {Product} from "../components/Product";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { Product } from "../components/Product";
 
-export function ProductsList({navigation}){
-
+export function ProductsList({ products }){
+    const navigation = useNavigation()
     function renderProduct({item: product}){
         return(
             <Product 
                 {...product}
                 onPress={() => {
-                    navigation.navigate('ProductDetails', {productId: product.id})
+                    navigation.navigate('ProductDetails', {productId: product._id})
                 }}
             />
         )
     }
 
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        setProducts(getProducts())
-    })
-
     return(
         <FlatList 
             style={styles.productsList}
             contentContainerStyle={styles.productsListContainer}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item._id.toString()}
             data={products}
             renderItem={renderProduct}
         />

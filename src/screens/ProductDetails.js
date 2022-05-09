@@ -1,23 +1,23 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {Text, StyleSheet, View, Image, ScrollView, SafeAreaView, Button} from "react-native";
-import { getProduct } from '../services/ProductsService';
-import {CartContext} from "../CartContext";
+import ProductsService, { getProduct } from '../services/ProductsService';
+import {CartContext} from "../hook/CartContext";
 
 export function ProductDetails({route}) {
 
     const {productId} = route.params;
+    console.log("productId", productId)
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        setProduct(getProduct(productId))
-    })
+        ProductsService.getProduct(productId).then((res) => setProduct(res)) 
+    }, [])
 
     const {addItemToCart} = useContext(CartContext)
 
     function onAddToCart(){
-      addItemToCart(product.id)
+      addItemToCart(product)
     }
-
 
   return (
     <SafeAreaView>
@@ -27,7 +27,7 @@ export function ProductDetails({route}) {
             </View>
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{product.name}</Text>
-                <Text style={styles.price}>$ {product.price}</Text>
+                <Text style={styles.price}>{product.price} тг</Text>
                 <Text style={styles.description}>{product.description}</Text>
                 <Button onPress={onAddToCart} title="Add To Cart" />
             </View>
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
       backgroundColor: 'white'
     },
     image: {
-      width: '100%',
+      width: 400,
+      height: 350,
       aspectRatio: 1
     },
     infoContainer: {
