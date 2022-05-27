@@ -10,7 +10,6 @@ export function Product({name, price, image, onPress}){
                     <Text style={styles.name}>{name}</Text>
                     <Text style={styles.price}> {price} тг</Text>
                 </View>
-                    
             </View>
         </TouchableOpacity>
     )

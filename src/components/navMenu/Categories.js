@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, FlatList, TouchableOpacity } from "react-native";
-import categoriesService from '../../services/categoriesService';
+import { CategoriesContext } from '../../hook/CategoriesContext';
 
 const Item = ({ title, navigation }) => (
-        <View style={styles.item}>
-            <TouchableOpacity onPress={() => navigation.navigate(title)}>
-                <Text style={styles.title}>{title}</Text>
-            </TouchableOpacity>
-        </View>
+    <View style={styles.item}>
+        <TouchableOpacity onPress={() => navigation.navigate(title, {name: title})}>
+            <Text style={styles.title}>{title}</Text>
+        </TouchableOpacity>
+    </View>
     
 );
 
 const Categories = ({ navigation }) => {
-    const [ categories, setCategories ] = useState([])
-    useEffect(() => {
-        categoriesService.fetchAll().then((res) => {
-            const newArr = []
-            Object.values(res).map((elem) => newArr.push(elem))
-            setCategories(newArr)
-        }) 
-    }, [])
+    const { categories } = useContext(CategoriesContext)
     const renderItem = ({ item }) => (
         <Item title={item.title} navigation={navigation} />
     );

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export const Favorite = () => {
+export const UserOrders = () => {
     return (
         <View>
-            <Text>Favorite</Text>
+            <Text>заказы</Text>
         </View>
     )
 }

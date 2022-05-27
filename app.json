@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ecommerce-course",
-    "slug": "ecommerce-course",
+    "name": "farm-products",
+    "slug": "farm-products",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -23,10 +23,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "kz.com.farmproducts",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./src/assets/favicon.png",
+      "config": {
+        "firebase": {
+          "appId": "1:209433205255:web:943b571e45dfb57f4fa8a2",
+          "apiKey": "AIzaSyBzycx0pFuuW8DH_CcD1tvvQXyZ4c_ekGw",
+          "projectId": "farm-products-25b86"
+        }
+      }
     }
   }
 }

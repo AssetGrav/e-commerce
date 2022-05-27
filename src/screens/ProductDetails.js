@@ -2,17 +2,15 @@ import React, {useEffect, useState, useContext} from 'react';
 import {Text, StyleSheet, View, Image, ScrollView, SafeAreaView, Button} from "react-native";
 import ProductsService, { getProduct } from '../services/ProductsService';
 import {CartContext} from "../hook/CartContext";
+import { ProductsContext } from '../hook/ProductsContext';
 
 export function ProductDetails({route}) {
-
     const {productId} = route.params;
-    console.log("productId", productId)
     const [product, setProduct] = useState({});
-
+    const { getProduct } = useContext(ProductsContext)
     useEffect(() => {
-        ProductsService.getProduct(productId).then((res) => setProduct(res)) 
+      setProduct(getProduct(productId))
     }, [])
-
     const {addItemToCart} = useContext(CartContext)
 
     function onAddToCart(){
@@ -37,32 +35,32 @@ export function ProductDetails({route}) {
 }
 
 const styles = StyleSheet.create({
-    imageContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-      backgroundColor: 'white'
-    },
-    image: {
-      width: 400,
-      height: 350,
-      aspectRatio: 1
-    },
-    infoContainer: {
-      padding: 16
-    },
-    name: {
-      fontSize: 22,
-      fontWeight: 'bold',
-    },
-    price: {
-      fontSize: 16,
-      fontWeight: '600',
-      marginBottom: 8,
-    },
-    description: {
-      fontSize: 16,
-      fontWeight: '400',
-      color: '#787878',
-      marginBottom: 16,
-    },
-  });
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
+  image: {
+    width: 400,
+    height: 350,
+    aspectRatio: 1
+  },
+  infoContainer: {
+    padding: 16
+  },
+  name: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#787878',
+    marginBottom: 16,
+  },
+});

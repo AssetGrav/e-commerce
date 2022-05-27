@@ -11,19 +11,18 @@ export const MenuUp = () => {
             materialIcon: 'menu' 
         }, 
         {
-            name: 'Избранные',
+            name: 'О нас',
             materialIcon: 'star-outline'
         },
         {
-            name: 'Подарки',
+            name: 'Контакты',
             materialIcon: 'gift-outline'
         },
         {
-            name: 'Спрос',
+            name: 'Политика',
             materialIcon: 'account-multiple-outline'
         }
     ]
-    
     
     return (
         <View style={styles.menu}>

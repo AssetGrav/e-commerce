@@ -3,6 +3,7 @@ import { Cart } from './downMenu/Cart';
 import { Search } from './downMenu/Search';
 import { User } from './downMenu/User';
 import { Home } from './downMenu/Home';
+import { TransitionSpecs } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -11,8 +12,7 @@ const Tab = createBottomTabNavigator();
 export function TabNav() {
     return (
         <Tab.Navigator
-            initialRouteName="Home"
-            barStyle={{ backgroundColor: '#EFF5FB' }}
+            initialRouteName="HomePage"
         >
             <Tab.Screen
                 name="Home"
@@ -42,11 +42,15 @@ export function TabNav() {
                     tabBarLabel: '',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="cart" color={color} size={size} />
-                    )
+                    ),
+                    transitionSpec: {
+                        open: TransitionSpecs.TransitionIOSSpec,
+                        close: TransitionSpecs.TransitionIOSSpec,
+                    }
                 }}
             />
             <Tab.Screen
-                name="User"
+                name="Пользователь"
                 component={User}
                 options={{
                     tabBarLabel: '',

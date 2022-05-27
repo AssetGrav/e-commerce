@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, {createContext, useState } from "react";
+import React, {createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -7,6 +7,9 @@ export function CartProvider(props){
     const navigation = useNavigation()
 
     const [items, setItems] = useState([]);
+    useEffect(() => {
+
+    }, [items])
 
     function addItemToCart(product){
         setItems((prevItems) => {
@@ -25,24 +28,44 @@ export function CartProvider(props){
     }
 
     function getItemsCount(id, value){
-        console.log("?", id)
-        setItems((prevItems) => {
-            return prevItems.map((item) => {
-                if (item.id === id) {
-                    item.qty = value
-                    item.totalPrice = item.product.price * value;
-                }
-                return item;
+        if (value > 0 ) {
+            setItems((prevItems) => {
+                return prevItems.map((item) => {
+                    if (item.id === id) {
+                        item.qty = value
+                        item.totalPrice = item.product.price * value;
+                    }
+                    return item;
+                })
             })
-        })
+        } else if (value === 0) {
+            setItems((prevItems) => {
+                return prevItems.filter((item) => {
+                    return item.id !== id 
+                })
+            })
+        }
     }
 
     function getTotalPrice() {
         return items.reduce((sum, item) => (sum + item.totalPrice), 0)
     }
 
+    function getOrder(data) {
+        // try {
+        //     console.log("prod", prod)
+        //     const productRef = firebase.database()
+        //         .ref('/product/')
+
+        //     productRef.push(prod)
+            
+        // } catch (error) {
+        //     alert(error.message)
+        // }
+    }
+
     return(
-        <CartContext.Provider value={{items, getItemsCount, addItemToCart, getTotalPrice}}>
+        <CartContext.Provider value={{items, getItemsCount, addItemToCart, getTotalPrice, getOrder}}>
             {props.children}
         </CartContext.Provider>
     )

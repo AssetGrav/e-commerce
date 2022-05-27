@@ -1,34 +1,11 @@
 import React from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, View, Text } from "react-native";
-// import { ProductsList } from "./src/screens/ProductsList.js";
-// import { ProductDetails } from "./src/screens/ProductDetails.js";
-// import { Cart } from "./src/screens/Cart.js";
-import { CartProvider } from "./src/hook/CartContext.js";
+import { StyleSheet } from "react-native";
 import { Navigation } from "./src/components/Navigation.js";
-import { ProductsProvider } from "./src/hook/ProductsContext.js";
 
 function App(){
   return(
         <>
-          {/* <Stack.Navigator>
-            
-            <Stack.Screen
-              name="Products"
-              component={ProductsList}
-              options={({navigation}) =>
-                ({title: 'Products', headerRight: () => <CartIcon navigation={navigation} />})} />
-            <Stack.Screen
-              name="ProductDetails"
-              component={ProductDetails}
-              options={({navigation}) =>
-                ({title: 'Products', headerRight: () => <CartIcon navigation={navigation} />})} />
-            <Stack.Screen
-              name="Cart"
-              component={Cart}
-              options={({navigation}) =>
-                ({title: 'Products', headerRight: () => <CartIcon navigation={navigation} />})} />
-          </Stack.Navigator> */}
             <Navigation />
         </>
   )

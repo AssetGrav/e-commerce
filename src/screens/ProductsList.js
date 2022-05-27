@@ -25,7 +25,6 @@ export function ProductsList({ products }){
             renderItem={renderProduct}
         />
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -37,5 +36,5 @@ const styles = StyleSheet.create({
       paddingVertical: 8,
       marginHorizontal: 8,
     },
-  });
+});
   

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import ProductsService from "../services/ProductsService";
+import { db } from "../../firebase";
 
 export const ProductsContext = createContext();
 
@@ -7,12 +7,27 @@ export function ProductsProvider(props) {
     const [products, setProducts] = useState([])
     
     useEffect(() => {
-        ProductsService.fetchAll().then((res) => setProducts(res))
+        const prodArray = []
+        db
+            .ref('product/')
+            .once('value')
+            .then(snapshot => {
+                const pro = snapshot.val()
+                Object.values(pro).map((elem) => prodArray.push(elem))
+                setProducts(prodArray)
+            })
+    }, [])
 
-    }, [products])
+    function getProduct(id) {
+        return products.find((elem) => elem._id === id)
+    }
+    
+    function getProductsByCategory(categId) {
+        return products.filter((elem) => elem.category === categId)
+    }
 
     return (
-        <ProductsContext.Provider value={{ products }}>
+        <ProductsContext.Provider value={{ products, getProduct, getProductsByCategory }}>
             {props.children}
         </ProductsContext.Provider>
     )

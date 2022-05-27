@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Button } from 'react-native';
 import { ProductsContext } from '../../hook/ProductsContext';
 import { ProductsList } from '../../screens/ProductsList';
 import UselessTextInput from '../UselessTextInput';
