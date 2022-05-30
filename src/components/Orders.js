@@ -6,17 +6,14 @@ import { CartContext } from '../hook/CartContext'
 const Orders = () => {
   const { user } = useContext(UserContext)
   const { orders, getOrders } = useContext(CartContext)
-
-  console.log("orders", orders)
   function renderItem({ item }) {
-    console.log("item", item)
     return (
       <>
         <View style={styles.cartLine}>
             <View style={styles.text}>
               <Text>
                 {item.orderInfo.products.map((elem) =>
-                  elem.product.name + " " + elem.qty + " * " + elem.product.measurement + " " + elem.product.price + " тг"  + ", ")}
+                  elem.product.name + " " + elem.qty + " " + elem.product.measurement + " * " + " " + elem.product.price + " тг"  + ", ")}
               </Text>
             </View>
             <View style={styles.input}>
@@ -37,7 +34,7 @@ const Orders = () => {
               contentContainerStyle={styles.itemsListContainer}
               data={orders}
               renderItem={renderItem}
-              keyExtractor={(item) => item.orderUser}
+              keyExtractor={(item) => item.orderInfo._id}
           />
         </View>
       </>

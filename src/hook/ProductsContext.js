@@ -8,16 +8,21 @@ export function ProductsProvider(props) {
     
     useEffect(() => {
         const prodArray = []
-        db
-            .ref('product/')
-            .once('value')
-            .then(snapshot => {
-                const pro = snapshot.val()
-                Object.values(pro).map((elem) => prodArray.push(elem))
-                if(prodArray !== []) {
-                    setProducts(prodArray)
-                } 
-            })
+        try {
+            db
+                .ref('product/')
+                .once('value')
+                .then(snapshot => {
+                    const pro = snapshot.val()
+                    Object.values(pro).map((elem) => prodArray.push(elem))
+                    if(prodArray !== []) {
+                        setProducts(prodArray)
+                    } 
+                })
+        } catch (error){
+            alert(error.message)
+        }
+        
     }, [])
 
     function getProduct(id) {

@@ -2,7 +2,7 @@ import React from "react";
 import {Text, Image, View, StyleSheet, TouchableOpacity} from "react-native";
 
 export function Product({ name, price, image, onPress, measurement}){
-    
+
     return(
         <TouchableOpacity style={styles.card} onPress={onPress}>
             <View style={styles.size}>
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     },
     image: {
         aspectRatio: 1,
-        maxWidth: 400,
-        maxHeight: 350,
+        maxWidth: 150,
+        maxHeight: 150,
         resizeMode: 'cover'
     },
     infoContainer: {

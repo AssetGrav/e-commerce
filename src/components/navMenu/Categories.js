@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, FlatList, TouchableOpacity } from "react-native";
 import { CategoriesContext } from '../../hook/CategoriesContext';
 

@@ -27,6 +27,4 @@ const auth = firebase.auth()
 
 const db = app.database();
 
-console.log("database", db.ref('/product'), auth)
-
 export { auth, db, firebase }

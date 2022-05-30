@@ -8,14 +8,19 @@ export const CategoriesProvider = (props) => {
 
     useEffect(() => {
         const prodArray = []
-        db
-            .ref('category/')
-            .once('value')
-            .then(snapshot => {
-                const pro = snapshot.val()
-                Object.values(pro).map((elem) => prodArray.push(elem))
-                setCategories(prodArray)
-            })
+        try {
+            db
+                .ref('category/')
+                .once('value')
+                .then(snapshot => {
+                    const pro = snapshot.val()
+                    Object.values(pro).map((elem) => prodArray.push(elem))
+                    setCategories(prodArray)
+                })
+        } catch (error) {
+            alert(error.message)
+        }
+        
     }, [])
 
     function getCategory(categ) {

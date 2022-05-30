@@ -60,7 +60,7 @@ export function CartProvider(props){
                 .ref('/order/')
 
             await productRef.push(data)
-            
+            setItems([])
         } catch (error) {
             alert(error.message)
         }
@@ -78,7 +78,7 @@ export function CartProvider(props){
                 orderArray.filter((elem) => elem.orderUser === user)
                 if (orderArray !== []) {
                     setOrders(orderArray)
-                }
+                } 
             })
     }
 

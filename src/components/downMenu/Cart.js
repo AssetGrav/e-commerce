@@ -71,7 +71,7 @@ export function Cart() {
 							</View>
 							<View>
 								<Text style={styles.productTotal}>
-									x {item.totalPrice} тг
+									{item.product.measurement + " " + item.totalPrice} тг
 								</Text>
 							</View>
 						</View>
@@ -111,7 +111,9 @@ const styles = StyleSheet.create({
 		borderTopWidth: 1
 	},
 	productTotal: {
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		paddingLeft: 150,
+		transform: [{ translateY: -30 }]
 	},
 	lineTotal: {
 		fontWeight: 'bold'

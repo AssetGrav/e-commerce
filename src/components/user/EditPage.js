@@ -4,6 +4,7 @@ import { UserContext } from '../../hook/UserContext';
 import UselessTextInput from '../UselessTextInput';
 import UserInfoString from '../UserInfoString';
 import { validator } from '../../utils/validator';
+import { useNavigation } from '@react-navigation/native';
 
 const EditPage = ({ route }) => {
     const [ value, onChangeText ] = useState('')
@@ -11,6 +12,7 @@ const EditPage = ({ route }) => {
     const [ errors, setErrors ] = useState({})
     const [ data, setData ] = useState({})
     const { user, userUpgrade } = useContext(UserContext)
+    const navigation = useNavigation();
     useEffect(() => {
         setData(user)
     }, [])
@@ -21,6 +23,7 @@ const EditPage = ({ route }) => {
         const isValid = validate();
         if (!isValid) return;
         userUpgrade(data, text, text2)
+        navigation.navigate("HomePage")
     }
     function updateValue(date, value) {
         setData((prevState) => ({

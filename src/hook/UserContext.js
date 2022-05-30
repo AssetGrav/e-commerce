@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, firebase } from "../../firebase";
-import UserService from "../services/UserService";
 import { Alert } from "react-native";
 
 export const UserContext = React.createContext();
@@ -15,18 +14,13 @@ export function UserProvider(props) {
     const [sign, setSign] = useState(false)
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                setUser(user)
-                let uid = user.uid;
-                // ...
-            } else {
-                // User is signed out
-                // ...
+        const unsubscribe = auth.onAuthStateChanged(userName => {
+            if (userName) {
+                setUser(userName)
             }
-        });
+        })
+        return unsubscribe
+        
     }, [user])
 
     function getUser(email, password) {
@@ -34,7 +28,7 @@ export function UserProvider(props) {
             .createUserWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 let userAdd = userCredentials.user
-                setSign(true)
+                // setSign(true)
             })
             .catch(error => setError(error.message))
     }
@@ -44,7 +38,7 @@ export function UserProvider(props) {
             .signInWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const userIn = userCredentials.user
-                console.log('Logged in with', userIn)
+                // setSign(true)
             })
             .catch(error => console.log(error))
     }
@@ -56,7 +50,6 @@ export function UserProvider(props) {
             user.updateProfile({
                 [changeName]: text,
             }).then((doc) => {
-                console.log("doc", doc)
                 // Update successful
                 // ...
             }).catch((error) => {
@@ -64,7 +57,6 @@ export function UserProvider(props) {
             });   
         } else if (changeName === "email") {
             user.updateEmail(text).then((doc) => {
-                console.log("email", doc)
                 // Update successful
                 // ...
             }).catch((error) => {
@@ -78,7 +70,6 @@ export function UserProvider(props) {
             }
             reauthenticate(text2).then(() => {
                 user.updatePassword(text).then((doc) => {
-                    console.log("doc", doc)
                     // Update successful
                     // ...
                 }).catch((error) => {

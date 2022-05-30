@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {Text, StyleSheet, View, Image, ScrollView, SafeAreaView, Button} from "react-native";
-import ProductsService, { getProduct } from '../services/ProductsService';
 import {CartContext} from "../hook/CartContext";
 import { ProductsContext } from '../hook/ProductsContext';
 

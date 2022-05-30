@@ -25,7 +25,8 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "kz.com.farmproducts",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./src/assets/favicon.png",
