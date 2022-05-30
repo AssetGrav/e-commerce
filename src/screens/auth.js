@@ -4,7 +4,7 @@ import UselessTextInput from '../components/UselessTextInput';
 import { auth } from '../../firebase.js'
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../hook/UserContext';
-// import useMockData from '../utils/mockData';
+import useMockData from '../utils/mockData';
 
 const Auth = () => {
     const [email, setEmail] = useState('')

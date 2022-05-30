@@ -18,6 +18,7 @@ import EditPage from './user/EditPage';
 import Help from './Help';
 import TermsOfUse from './TermsOfUse';
 import { CategoriesProvider } from '../hook/CategoriesContext';
+import Orders from './Orders';
 
 const Stack = createStackNavigator();
 
@@ -88,6 +89,10 @@ export function Navigation() {
                                 <Stack.Screen 
                                     name="Политика" 
                                     component={Politic} 
+                                />
+                                <Stack.Screen
+                                    name="Заказы"
+                                    component={Orders}
                                 />
                                 <Stack.Screen
                                     name="Информация о пользователе"

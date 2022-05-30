@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { CartContext } from '../../hook/CartContext';
 import { UserContext } from '../../hook/UserContext';
 import SignOut from '../SignOut';
 
 export const User = ({ navigation }) => {
     const { user } = useContext(UserContext)
+    const { getOrders } = useContext(CartContext)
     if (user) {
         return (
             <View style={[styles.container, { flexDirection: "column" }]}>
                 <View style={styles.head}>
                     <View style={{ flex: 1, marginLeft: '5%' }}>
                         <Image 
-                            source={ user.image }
+                            source={{ source: user.image }}
                             style={{ width: 70, height: 70, borderRadius: 70/2 }} 
                         />
                     </View>
@@ -20,7 +22,11 @@ export const User = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={styles.info}>
-                    <Text>Заказы</Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Заказы')}
+                    >
+                        <Text>Заказы</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.info}>
                     <TouchableOpacity

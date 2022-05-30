@@ -14,7 +14,9 @@ export function ProductsProvider(props) {
             .then(snapshot => {
                 const pro = snapshot.val()
                 Object.values(pro).map((elem) => prodArray.push(elem))
-                setProducts(prodArray)
+                if(prodArray !== []) {
+                    setProducts(prodArray)
+                } 
             })
     }, [])
 

@@ -31,7 +31,7 @@ const useMockData = () => {
         }
     }
 
-//   return { initialize }
+  return { initialize }
 }
 
 export default useMockData

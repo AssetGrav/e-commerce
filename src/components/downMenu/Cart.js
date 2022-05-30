@@ -3,13 +3,14 @@ import {View, Image, Text, FlatList, StyleSheet, Button } from "react-native";
 import {CartContext} from "../../hook/CartContext";
 import NumericInput from 'react-native-numeric-input';
 import { UserContext } from "../../hook/UserContext";
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigation } from "@react-navigation/native";
 
 export function Cart() {
     const {items, getItemsCount, getTotalPrice, getOrder } = useContext(CartContext)
 	const { user } = useContext(UserContext)
+	const navigation = useNavigation()
 
-	
-	
     function Totals(){
         const [total, setTotal] = useState(0);
         useEffect(() => {
@@ -17,14 +18,17 @@ export function Cart() {
         })
 
 		const [order, setOrder] = useState({
-			_id: "uuid.v4()",
-			user: user.email,
-			products: items,
-			total: getTotalPrice()
+			orderUser: user.email,
+			orderInfo: {
+				_id: uuidv4(),
+				products: items,
+				total: getTotalPrice()
+			}
 		})
-		console.log("order", order)
 		function handleOrder(data) {
 			getOrder(data)
+			alert("Спасибо за покупку!")
+			navigation.replace('HomePage')
 		}
 
         return(
@@ -34,7 +38,7 @@ export function Cart() {
 					<Text style={styles.mainTotal}> {total} тг</Text>
 				</View>
 				<View>
-					<Button title="купить" onPress={() => handleOrder(order)}></Button>
+					<Button disabled={total === 0 ? true : false}  title="купить" onPress={() => handleOrder(order)}></Button>
 				</View>
 			</View>
         )
@@ -44,42 +48,37 @@ export function Cart() {
 		const onChangeCount = (value) => (
 			getItemsCount(item.product._id, value)
 		)
-		
-		// if (item.qty !== 0) {
-			return(
-				<>
-					<View style={styles.cartLine}>
-						<Image style={styles.image} source={item.product.image} />
-						<View style={styles.lineLeft}>
-							<View style={styles.text}>
-								<Text>
-									{item.product.name}
-								</Text>
+		return(
+			<>
+				<View style={styles.cartLine}>
+					<Image style={styles.image} source={{ uri: item.product.image }} />
+					<View style={styles.lineLeft}>
+						<View style={styles.text}>
+							<Text>
+								{item.product.name}
+							</Text>
+						</View>
+						<View style={styles.input}>
+							<View>
+								<NumericInput 
+									className="form-control"
+									type='up-down'
+									onChange={onChangeCount}
+									value={item.qty} 
+									step={1}
+									iconSize={20}
+								/>
 							</View>
-							<View style={styles.input}>
-								<View>
-									<NumericInput 
-										className="form-control"
-										type='up-down'
-										onChange={onChangeCount}
-										value={item.qty} 
-										step={1}
-										iconSize={20}
-									/>
-								</View>
-								<View>
-									<Text style={styles.productTotal}>
-										x {item.totalPrice} тг
-									</Text>
-								</View>
+							<View>
+								<Text style={styles.productTotal}>
+									x {item.totalPrice} тг
+								</Text>
 							</View>
 						</View>
 					</View>
-				</>
-			)
-		// } else {
-		// 	<View>{{}}</View>
-		// }
+				</View>
+			</>
+		)
     }
 
     return(
